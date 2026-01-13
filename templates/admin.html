@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container full-screen">
+        <!-- Logout -->
+        <a href="{{ url_for('logout') }}"><button class="btn-logout">Logout</button></a>
+
+        <!-- ================== ADD NEW CARD ================== -->
+        <h2>Add New Quiz Card</h2>
+        <form method="POST" action="{{ url_for('admin_panel') }}" class="form-card">
+            <input type="text" name="question" placeholder="Question" required>
+            <input type="text" name="option_a" placeholder="Option A" required>
+            <input type="text" name="option_b" placeholder="Option B" required>
+            <input type="text" name="option_c" placeholder="Option C" required>
+            <input type="text" name="option_d" placeholder="Option D" required>
+            <input type="text" name="answer" placeholder="Answer (A/B/C/D)" required>
+            <button type="submit" name="action" value="add" class="btn-add">Add Card</button>
+        </form>
+
+        <!-- ================== EXISTING CARDS TABLE ================== -->
+        <h2>Existing Quiz Cards</h2>
+        <div class="table-wrapper">
+            <table class="cards-table" id="cards-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Question</th>
+                        <th>Option A</th>
+                        <th>Option B</th>
+                        <th>Option C</th>
+                        <th>Option D</th>
+                        <th>Answer</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="cards-tbody">
+                    {% for card in cards %}
+                    <tr>
+                        <td>{{ card['id'] }}</td>
+                        <td>{{ card['question'] }}</td>
+                        <td>{{ card['option_a'] }}</td>
+                        <td>{{ card['option_b'] }}</td>
+                        <td>{{ card['option_c'] }}</td>
+                        <td>{{ card['option_d'] }}</td>
+                        <td>{{ card['answer'] }}</td>
+                        <td>
+                            <button class="btn-edit" onclick="openModal({{ card['id'] }}, '{{ card['question'] }}', '{{ card['option_a'] }}', '{{ card['option_b'] }}', '{{ card['option_c'] }}', '{{ card['option_d'] }}', '{{ card['answer'] }}')">Update</button>
+                            <form method="POST" action="{{ url_for('admin_panel') }}" style="display:inline;">
+                                <input type="hidden" name="id" value="{{ card['id'] }}">
+                                <button type="submit" name="action" value="delete" class="btn-delete" onclick="return confirm('Delete this card?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+            <!-- Pagination -->
+            <div class="pagination" style="text-align:center; margin-top:15px;">
+                <button id="prev-btn" onclick="prevPage()">Prev</button>
+                <span id="page-info"></span>
+                <button id="next-btn" onclick="nextPage()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================== MODAL UPDATE ================== -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Update Quiz Card</h2>
+            <form method="POST" action="{{ url_for('admin_panel') }}" id="modal-form">
+                <input type="hidden" name="id" id="modal-id">
+                <input type="text" name="question" id="modal-question" required placeholder="Question">
+                <input type="text" name="option_a" id="modal-option-a" required placeholder="Option A">
+                <input type="text" name="option_b" id="modal-option-b" required placeholder="Option B">
+                <input type="text" name="option_c" id="modal-option-c" required placeholder="Option C">
+                <input type="text" name="option_d" id="modal-option-d" required placeholder="Option D">
+                <input type="text" name="answer" id="modal-answer" required placeholder="Answer (A/B/C/D)">
+                <button type="submit" name="action" value="edit" class="btn-edit">Update</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id, question, a, b, c, d, answer) {
+            document.getElementById('modal-id').value = id;
+            document.getElementById('modal-question').value = question;
+            document.getElementById('modal-option-a').value = a;
+            document.getElementById('modal-option-b').value = b;
+            document.getElementById('modal-option-c').value = c;
+            document.getElementById('modal-option-d').value = d;
+            document.getElementById('modal-answer').value = answer;
+            document.getElementById('modal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        const rowsPerPage = 10;
+        let currentPage = 1;
+
+        const table = document.getElementById('cards-table');
+        const tbody = document.getElementById('cards-tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const totalPages = Math.ceil(rows.length / rowsPerPage);
+        const pageInfo = document.getElementById('page-info');
+
+        function showPage(page) {
+            currentPage = page;
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+
+            rows.forEach((row, index) => {
+                row.style.display = (index >= start && index < end) ? '' : 'none';
+            });
+
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+            document.getElementById('prev-btn').disabled = currentPage === 1;
+            document.getElementById('next-btn').disabled = currentPage === totalPages;
+        }
+
+        function prevPage() {
+            if (currentPage > 1) showPage(currentPage - 1);
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) showPage(currentPage + 1);
+        }
+
+        // Initialize
+        showPage(1);
+    </script>
+</body>
+</html>

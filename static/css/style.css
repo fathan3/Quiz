@@ -1,0 +1,445 @@
+/* ========== GLOBAL RESET ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px 20px;
+    color: #333;
+}
+
+/* ========== CONTAINER ========== */
+.container {
+    background: #ffffffdd;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* ================== HEADINGS ================== */
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* ================== TEXT ================== */
+p {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.error-msg {
+    color: #f44336;
+    margin-bottom: 15px;
+}
+
+/* ================== BUTTONS ================== */
+button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+/* ================== LINKS BUTTONS ================== */
+a button {
+    display: inline-block;
+    margin: 10px 0;
+}
+
+/* ================== FORMS ================== */
+input[type="text"], input[type="password"] {
+    display: block;
+    width: 95%;
+    padding: 12px;
+    margin: 8px 0 15px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    outline: none;
+    border-color: #2575fc;
+    box-shadow: 0 0 8px rgba(37, 117, 252, 0.3);
+}
+
+.form-card button,
+.inline-form button,
+.btn-logout {
+    margin-top: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center; /* center horizontal */
+    gap: 20px; /* jarak antar tombol */
+    margin-top: 20px;
+}
+
+#flashcard-container p, 
+#flashcard-container label {
+    text-align: justify; /* teks pertanyaan dan opsi rata kiri-kanan */
+    line-height: 1.5; /* agar lebih mudah dibaca */
+}
+
+.pagination button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* ================== ADMIN PANEL ================== */
+
+/* Container Add Card */
+.form-card {
+    background: #f0f4ff; /* warna lembut berbeda dari container utama */
+    padding: 20px 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+}
+
+.form-card input {
+    display: block;
+    width: 95%;
+    padding: 12px;
+    margin: 8px 0 12px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-card input:focus {
+    border-color: #2575fc;
+    box-shadow: 0 0 8px rgba(37, 117, 252, 0.3);
+    outline: none;
+}
+
+.btn-add {
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-add:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+/* Existing Cards List */
+.card-list {
+    list-style: none;
+    padding: 0;
+}
+
+.card-item {
+    background-color: #ffffff;
+    border-left: 5px solid #2575fc; /* garis biru untuk menonjolkan */
+    margin-bottom: 15px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.card-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* Soal number & correct answer highlight */
+.card-item strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+.card-item .card-meta {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* Inline forms for edit/delete */
+.inline-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.inline-form input {
+    width: 120px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.inline-form input:focus {
+    border-color: #2575fc;
+    box-shadow: 0 0 5px #2575fc66;
+    outline: none;
+}
+
+.inline-form button {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Tombol edit/delete */
+.btn-edit {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background-color: #0b7dda;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background-color: #da190b;
+}
+
+/* Logout */
+.btn-logout {
+    padding: 8px 15px;
+    background-color: #555;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.btn-logout:hover {
+    background-color: #333;
+}
+
+.cards-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.cards-table th, .cards-table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.cards-table th {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.cards-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.cards-table tr:hover {
+    background-color: #e0e7ff;
+}
+
+/* Tombol aksi dalam tabel */
+.cards-table .btn-edit,
+.cards-table .btn-delete {
+    padding: 5px 10px;
+    font-size: 13px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.cards-table .btn-edit {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+.cards-table .btn-edit:hover {
+    background-color: #0b7dda;
+}
+
+.cards-table .btn-delete {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.cards-table .btn-delete:hover {
+    background-color: #da190b;
+}
+
+/* Responsive scroll untuk tabel jika layar kecil */
+@media screen and (max-width: 768px) {
+    .cards-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+/* ================== LOGIN FORM ================== */
+.login-form {
+    background: #f0f4ff;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.login-form input {
+    display: block;
+    width: 95%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.login-form button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+/* ================== QUIZ FLASHCARD ================== */
+#flashcard-container {
+    background: #fefefe;
+    padding: 25px 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    min-height: 180px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+#flashcard-container.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+#flashcard-container.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+input[type="radio"]:checked + label {
+    background: #2575fc33;
+    border-radius: 5px;
+}
+
+/* ================== MODAL ================== */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 10; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    animation: modalOpen 0.4s ease;
+}
+
+@keyframes modalOpen {
+    from {opacity: 0; transform: scale(0.8);}
+    to {opacity: 1; transform: scale(1);}
+}
+
+#close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: -20px;
+}
+
+#close-modal:hover {
+    color: #000;
+}

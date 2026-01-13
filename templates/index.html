@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Quiz Cards</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Mini Quiz Cards!</h1>
+        <p>Belajar melalui quiz interaktif dengan flashcards.</p>
+
+        <div class="buttons">
+            <a href="{{ url_for('quiz') }}"><button>Mulai Quiz</button></a>
+            <a href="{{ url_for('login') }}"><button>Login Admin</button></a>
+        </div>
+    </div>
+</body>
+</html>
