@@ -2,6 +2,8 @@
 
 Aplikasi **Interactive Flashcard Quiz** modern yang dibangun menggunakan **Python Flask** dengan arsitektur **OOP (Object-Oriented Programming)** dan **MySQL** sebagai media penyimpanan data.
 
+🌐 **Live Demo:** [quizzz-red.vercel.app](https://quizzz-red.vercel.app)
+
 ---
 
 ## 🚀 Fitur Utama
